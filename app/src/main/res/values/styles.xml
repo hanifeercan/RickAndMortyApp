@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Text">
+        <item name="fontFamily">@font/avenir</item>
+        <item name="android:fontFamily">@font/avenir</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text.H1" parent="Text">
+        <item name="android:textSize">36sp</item>
+    </style>
+
+</resources>
