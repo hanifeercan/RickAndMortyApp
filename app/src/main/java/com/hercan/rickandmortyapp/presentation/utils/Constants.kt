@@ -5,4 +5,6 @@ object Constants {
         const val PREFS_FILENAME = "RickAndMorty"
         const val HAS_LAUNCHED_BEFORE = "HasLaunchedBefore"
     }
+
+    const val BASE_URL = "https://rickandmortyapi.com/api/"
 }
