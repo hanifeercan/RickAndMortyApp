@@ -3,7 +3,7 @@ package com.hercan.rickandmortyapp.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.hercan.rickandmortyapp.data.RickAndMortyApi
-import com.hercan.rickandmortyapp.presentation.utils.Constants.BASE_URL
+import com.hercan.rickandmortyapp.presentation.utils.Constants.Network.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
