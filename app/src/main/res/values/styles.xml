@@ -11,4 +11,8 @@
         <item name="android:textSize">36sp</item>
     </style>
 
+    <style name="Text.H2" parent="Text">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

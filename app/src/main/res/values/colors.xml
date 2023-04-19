@@ -9,6 +9,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="bg_splash">#B4D9A8</color>
+    <color name="bg_home">#F8FFF8</color>
+    <color name="bg_resident">#F3FCF0</color>
 
+    <color name="fizz">#B4D9A8</color>
     <color name="atoll">#2C797C</color>
+
 </resources>
