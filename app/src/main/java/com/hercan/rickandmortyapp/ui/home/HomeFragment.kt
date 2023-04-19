@@ -47,6 +47,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 binding.rvLocation.isVisible = it is LoadState.NotLoading
             }
         }
+
+        pagingAdapter.setClickListener {
+            it?.let {
+                viewModel.getResidents(it)
+            }
+        }
     }
 
     private fun bindViewModel() {

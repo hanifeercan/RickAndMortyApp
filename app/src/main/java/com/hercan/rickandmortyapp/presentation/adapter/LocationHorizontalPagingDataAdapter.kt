@@ -12,12 +12,17 @@ import com.hercan.rickandmortyapp.presentation.model.LocationUIModel
 class LocationHorizontalPagingDataAdapter :
     PagingDataAdapter<LocationUIModel, LocationHorizontalPagingDataAdapter.ViewHolder>(diffCallback) {
     private var selectedItemPosition: Int = 0
+    private var clickListener: ((residents: ArrayList<Int>?) -> Unit)? = null
 
     inner class ViewHolder(private val binding: LocationItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: LocationUIModel, position: Int) {
             binding.name.text = item.name
+
+            if (position == 0) {
+                clickListener?.invoke(item.residents)
+            }
 
             if (position == selectedItemPosition) {
                 binding.name.setBackgroundResource(R.drawable.bg_selected_location)
@@ -29,6 +34,7 @@ class LocationHorizontalPagingDataAdapter :
                 if (selectedItemPosition == position) {
                     return@setOnClickListener
                 }
+                clickListener?.invoke(item.residents)
                 notifyItemChanged(selectedItemPosition) //previouslyPosition
                 selectedItemPosition = position
                 notifyItemChanged(selectedItemPosition)
@@ -62,6 +68,10 @@ class LocationHorizontalPagingDataAdapter :
                 return oldItem.id == newItem.id
             }
         }
+    }
+
+    fun setClickListener(listener: (residents: ArrayList<Int>?) -> Unit) {
+        this.clickListener = listener
     }
 
 }

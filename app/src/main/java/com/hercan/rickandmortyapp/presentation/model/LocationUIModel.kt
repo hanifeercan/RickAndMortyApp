@@ -5,7 +5,7 @@ import com.hercan.rickandmortyapp.domain.models.GetLocationsResponseModel
 data class LocationUIModel(
     val id: Int? = null,
     val name: String? = null,
-    val residents: List<Int>? = null,
+    val residents: ArrayList<Int>? = null,
     val hasNextPage: Boolean = false
 )
 
@@ -19,11 +19,11 @@ fun GetLocationsResponseModel.toLocationUIModel(): List<LocationUIModel>? {
     }
 }
 
-fun getIdsFromLinkList(links: List<String>): List<Int> {
-    val idList = mutableListOf<Int>()
+fun getIdsFromLinkList(links: List<String>): ArrayList<Int> {
+    val idList = arrayListOf<Int>()
     links.map {
         val id = it.split("/").last().filter { it.isDigit() }
-        if (id.isEmpty()) {
+        if (id.isNotEmpty()) {
             idList.add(id.toInt())
         }
     }
