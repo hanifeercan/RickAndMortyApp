@@ -11,6 +11,8 @@ import com.hercan.rickandmortyapp.R
 import com.hercan.rickandmortyapp.databinding.FragmentHomeBinding
 import com.hercan.rickandmortyapp.presentation.adapter.LoaderAdapter
 import com.hercan.rickandmortyapp.presentation.adapter.LocationHorizontalPagingDataAdapter
+import com.hercan.rickandmortyapp.presentation.adapter.ResidentAdapter
+import com.hercan.rickandmortyapp.presentation.model.ResidentUIModel
 import com.hercan.rickandmortyapp.presentation.viewbinding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +22,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel: HomeViewModel by viewModels()
     lateinit var pagingAdapter: LocationHorizontalPagingDataAdapter
-
+    private val residentAdapter = ResidentAdapter { navigateToResidentDetail(it) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindUI()
@@ -39,6 +41,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 header = LoaderAdapter(),
                 footer = LoaderAdapter()
             )
+        }
+        binding.rvResidents.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            setHasFixedSize(true)
+            adapter = residentAdapter
         }
 
         pagingAdapter.addLoadStateListener {
@@ -59,6 +67,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.getLocations().observe(viewLifecycleOwner) {
             pagingAdapter.submitData(lifecycle, it)
         }
+
+        viewModel.residentList.observe(viewLifecycleOwner) {
+            it?.let {
+                residentAdapter.submitList(it)
+            }
+        }
+    }
+
+    private fun navigateToResidentDetail(residentUIModel: ResidentUIModel) {
+        //todo: navigate to detail page
     }
 
 }

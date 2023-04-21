@@ -2,6 +2,7 @@ package com.hercan.rickandmortyapp.domain.utils
 
 import android.util.Log
 import com.hercan.rickandmortyapp.domain.base.BaseResponseModel
+import com.hercan.rickandmortyapp.domain.models.ItemListResponseModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -19,6 +20,29 @@ suspend fun <T : BaseResponseModel> safeApiCall(call: suspend () -> Response<T>)
                     Resource.error(
                         Status.ERROR,
                         model.error
+                    )
+                )
+            }
+        } else {
+            emit(Resource.error(Status.ERROR, "İnternet Hatası!"))
+        }
+    }.catch { exception ->
+        Log.d("BaseRepository", exception.localizedMessage.toString())
+    }
+}
+
+suspend fun <T : BaseResponseModel> safeApiCallForItemList(call: suspend () -> Response<ItemListResponseModel<T>>): Flow<Resource<ItemListResponseModel<T>>> {
+    return flow {
+        val response = call.invoke()
+        if (response.isSuccessful) {
+            val list = response.body()!!
+            if (list.isNotEmpty() && list[0].error == null) {
+                emit(Resource.success(list))
+            } else {
+                emit(
+                    Resource.error(
+                        Status.ERROR,
+                        list[0].error ?: " "
                     )
                 )
             }

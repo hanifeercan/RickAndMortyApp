@@ -3,13 +3,9 @@ package com.hercan.rickandmortyapp.domain.models
 import com.google.gson.annotations.SerializedName
 import com.hercan.rickandmortyapp.domain.base.BaseResponseModel
 
-data class GetResidentsResponseModel(
-    @SerializedName("results") val results: List<GetResidentsResponseModelItem?>?
-) : BaseResponseModel()
-
-data class GetResidentsResponseModelItem(
+data class ResidentItem(
     @SerializedName("created") val created: String?,
-    @SerializedName("episode") val episode: List<String?>?,
+    @SerializedName("episode") val episode: List<String>?,
     @SerializedName("gender") val gender: String?,
     @SerializedName("id") val id: Int?,
     @SerializedName("image") val image: String?,
@@ -20,18 +16,14 @@ data class GetResidentsResponseModelItem(
     @SerializedName("status") val status: String?,
     @SerializedName("type") val type: String?,
     @SerializedName("url") val url: String?
+) : BaseResponseModel()
+
+data class Origin(
+    @SerializedName("name") val name: String?,
+    @SerializedName("url") val url: String?
 )
 
 data class Location(
-    @SerializedName("name")
-    val name: String?,
-    @SerializedName("url")
-    val url: String?
-)
-
-data class Origin(
-    @SerializedName("name")
-    val name: String?,
-    @SerializedName("url")
-    val url: String?
+    @SerializedName("name") val name: String?,
+    @SerializedName("url") val url: String?
 )

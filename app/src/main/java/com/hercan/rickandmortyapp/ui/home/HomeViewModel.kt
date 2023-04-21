@@ -1,7 +1,7 @@
 package com.hercan.rickandmortyapp.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -9,6 +9,8 @@ import androidx.paging.liveData
 import com.hercan.rickandmortyapp.domain.repository.RickAndMortyRepository
 import com.hercan.rickandmortyapp.domain.utils.Status
 import com.hercan.rickandmortyapp.presentation.model.LocationUIModel
+import com.hercan.rickandmortyapp.presentation.model.ResidentUIModel
+import com.hercan.rickandmortyapp.presentation.model.toResidentUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.onCompletion
@@ -20,6 +22,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val repository: RickAndMortyRepository) :
     ViewModel() {
 
+    private val _residentList: MutableLiveData<List<ResidentUIModel?>?> = MutableLiveData()
+    val residentList: LiveData<List<ResidentUIModel?>?> = _residentList
     fun getLocations(): LiveData<PagingData<LocationUIModel>> {
         return repository.getLocations().liveData
     }
@@ -27,14 +31,19 @@ class HomeViewModel @Inject constructor(private val repository: RickAndMortyRepo
     fun getResidents(ids: ArrayList<Int>) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getResidents(ids)
-                .onStart { }
-                .onCompletion { }
+                .onStart {
+                    //todo: show progress bar
+                }
+                .onCompletion {
+                    //todo: hide progress bar
+                }
                 .collect {
                     if (it.status == Status.SUCCESS) {
-                        Log.d("Hanife", it.data.toString())
+                        it.data?.toResidentUIModel()?.let {
+                            _residentList.postValue(it)
+                        }
                     } else {
-                        Log.d("Hanife", "Error var")
-
+                        //todo: show info
                     }
                 }
         }
