@@ -24,6 +24,13 @@ class HomeViewModel @Inject constructor(private val repository: RickAndMortyRepo
 
     private val _residentList: MutableLiveData<List<ResidentUIModel?>?> = MutableLiveData()
     val residentList: LiveData<List<ResidentUIModel?>?> = _residentList
+
+    private val _isOnLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isOnLoading: LiveData<Boolean> = _isOnLoading
+
+    private val _isOnError: MutableLiveData<String?> = MutableLiveData(null)
+    val isOnError: LiveData<String?> = _isOnError
+
     fun getLocations(): LiveData<PagingData<LocationUIModel>> {
         return repository.getLocations().liveData
     }
@@ -32,10 +39,10 @@ class HomeViewModel @Inject constructor(private val repository: RickAndMortyRepo
         viewModelScope.launch(Dispatchers.IO) {
             repository.getResidents(ids)
                 .onStart {
-                    //todo: show progress bar
+                    _isOnLoading.postValue(true)
                 }
                 .onCompletion {
-                    //todo: hide progress bar
+                    _isOnLoading.postValue(false)
                 }
                 .collect {
                     if (it.status == Status.SUCCESS) {
@@ -43,7 +50,7 @@ class HomeViewModel @Inject constructor(private val repository: RickAndMortyRepo
                             _residentList.postValue(it)
                         }
                     } else {
-                        //todo: show info
+                        _isOnError.postValue(it.message)
                     }
                 }
         }

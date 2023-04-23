@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hercan.rickandmortyapp.R
 import com.hercan.rickandmortyapp.databinding.ResidentItemViewBinding
 import com.hercan.rickandmortyapp.presentation.model.ResidentUIModel
 import com.squareup.picasso.Picasso
@@ -25,16 +26,16 @@ class ResidentAdapter(private val onClickCallback: (resident: ResidentUIModel) -
                     .load(it)
                     .into(binding.residentImage)
             }
-            item.gender.let {
-                //todo: set icons
+            item.gender?.trim()?.lowercase().let {
+
                 if (it.equals("female")) {
-                    //    holder.binding.genderImage.setImageResource(R.drawable.)
+                    binding.genderIcon.setImageResource(R.drawable.ic_female)
                 } else if (it.equals("male")) {
-                    //    holder.binding.genderImage.setImageResource(R.drawable.)
+                    binding.genderIcon.setImageResource(R.drawable.ic_male)
                 } else if (it.equals("genderless")) {
-                    //    holder.binding.genderImage.setImageResource(R.drawable.)
+                    binding.genderIcon.setImageResource(R.drawable.ic_genderless)
                 } else if (it.equals("unknown")) {
-                    //    holder.binding.genderImage.setImageResource(R.drawable.)
+                    binding.genderIcon.setImageResource(R.drawable.ic_unknown)
                 }
             }
             binding.root.setOnClickListener {
@@ -47,7 +48,6 @@ class ResidentAdapter(private val onClickCallback: (resident: ResidentUIModel) -
         val binding = ResidentItemViewBinding.inflate(LayoutInflater.from(parent.context))
         return ViewHolder(binding, onClickCallback)
     }
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)

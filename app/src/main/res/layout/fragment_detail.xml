@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_detail"
+    android:orientation="vertical"
+    tools:context=".ui.detail.DetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_16"
+        android:paddingVertical="@dimen/space_16">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/space_32"
+            android:layout_height="@dimen/space_32"
+            android:layout_gravity="center"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="@id/tv_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_name" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/Text.H3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/space_32"
+            android:gravity="center"
+            android:text="NAME"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/resident_Image"
+                android:layout_width="275dp"
+                android:layout_height="275dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="@dimen/space_50"
+                android:layout_marginVertical="@dimen/space_20"
+                android:src="@drawable/logo_splash" />
+
+            <TableLayout
+                android:id="@+id/table_Layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_20"
+                android:layout_marginBottom="@dimen/space_20"
+                android:orientation="vertical">
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="@dimen/space_5">
+
+                    <TextView
+                        style="@style/Text.H2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/status" />
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        style="@style/Text.T1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="status" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginVertical="@dimen/space_5">
+
+                    <TextView
+                        style="@style/Text.H2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/specy" />
+
+                    <TextView
+                        android:id="@+id/tv_specy"
+                        style="@style/Text.T1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="specy" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginVertical="@dimen/space_5">
+
+                    <TextView
+                        style="@style/Text.H2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/gender" />
+
+                    <TextView
+                        android:id="@+id/tv_gender"
+                        style="@style/Text.T1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="gender" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginVertical="@dimen/space_5">
+
+                    <TextView
+                        style="@style/Text.H2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/origin" />
+
+                    <TextView
+                        android:id="@+id/tv_origin"
+                        style="@style/Text.T1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="origin" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginVertical="@dimen/space_5">
+
+                    <TextView
+                        style="@style/Text.H2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/location" />
+
+                    <TextView
+                        android:id="@+id/tv_location"
+                        style="@style/Text.T1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="location" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginVertical="@dimen/space_5">
+
+                    <TextView
+                        style="@style/Text.H2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/episodes" />
+
+                    <TextView
+                        android:id="@+id/tv_episodes"
+                        style="@style/Text.T1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="episodes" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="@dimen/space_5"
+                    android:layout_marginBottom="@dimen/space_20">
+
+                    <TextView
+                        style="@style/Text.H2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/created" />
+
+                    <TextView
+                        android:id="@+id/tv_created_at"
+                        style="@style/Text.T1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:text="created" />
+                </TableRow>
+            </TableLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

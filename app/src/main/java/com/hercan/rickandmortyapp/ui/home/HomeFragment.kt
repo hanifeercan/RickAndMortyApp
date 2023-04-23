@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hercan.rickandmortyapp.R
@@ -13,6 +14,9 @@ import com.hercan.rickandmortyapp.presentation.adapter.LoaderAdapter
 import com.hercan.rickandmortyapp.presentation.adapter.LocationHorizontalPagingDataAdapter
 import com.hercan.rickandmortyapp.presentation.adapter.ResidentAdapter
 import com.hercan.rickandmortyapp.presentation.model.ResidentUIModel
+import com.hercan.rickandmortyapp.presentation.utils.gone
+import com.hercan.rickandmortyapp.presentation.utils.showError
+import com.hercan.rickandmortyapp.presentation.utils.visible
 import com.hercan.rickandmortyapp.presentation.viewbinding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -73,10 +77,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 residentAdapter.submitList(it)
             }
         }
+
+        viewModel.isOnLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.progressBar.visible()
+            } else {
+                binding.progressBar.gone()
+            }
+        }
+
+        viewModel.isOnError.observe(viewLifecycleOwner) {
+            it?.let {
+                requireContext().showError(it)
+
+            }
+        }
     }
 
     private fun navigateToResidentDetail(residentUIModel: ResidentUIModel) {
-        //todo: navigate to detail page
+        findNavController().navigate(HomeFragmentDirections.navigateToDetailFragment(residentUIModel))
     }
 
 }

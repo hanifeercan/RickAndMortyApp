@@ -2,17 +2,26 @@
 <resources>
 
     <style name="Text">
-        <item name="fontFamily">@font/avenir</item>
-        <item name="android:fontFamily">@font/avenir</item>
+        <item name="fontFamily">@font/avenir_regular</item>
+        <item name="android:fontFamily">@font/avenir_regular</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Text.H1" parent="Text">
         <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Text.H2" parent="Text">
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.H3" parent="Text.H2">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Text.T1" parent="Text">
+        <item name="android:textSize">22sp</item>
     </style>
 </resources>

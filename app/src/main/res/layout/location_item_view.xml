@@ -11,7 +11,7 @@
         style="@style/Text.H2"
         android:layout_width="@dimen/space_148"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
+        android:layout_marginHorizontal="@dimen/space_4"
         android:background="@drawable/bg_location"
         android:ellipsize="end"
         android:gravity="center"

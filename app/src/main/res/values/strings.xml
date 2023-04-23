@@ -5,4 +5,14 @@
 
     <string name="hello">HELLO!</string>
     <string name="welcome">WELCOME!</string>
+    <string name="status">Status:</string>
+    <string name="gender">Gender:</string>
+    <string name="specy">Specy:</string>
+    <string name="origin">Origin:</string>
+    <string name="location">Location:</string>
+    <string name="episodes">Episodes:</string>
+    <string name="created">Created at\n(in API):</string>
+
+    <string name="error_internet_connection">You do not have an Internet connection!</string>,
+
 </resources>

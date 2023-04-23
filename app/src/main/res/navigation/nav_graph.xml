@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/splashScreenFragment">
 
     <fragment
         android:id="@+id/splashScreenFragment"
@@ -18,5 +18,18 @@
         android:id="@+id/homeFragment"
         android:name="com.hercan.rickandmortyapp.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/navigateToDetailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.hercan.rickandmortyapp.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="residentUIModel"
+            app:argType="com.hercan.rickandmortyapp.presentation.model.ResidentUIModel" />
+    </fragment>
 </navigation>

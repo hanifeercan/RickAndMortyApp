@@ -24,7 +24,12 @@ suspend fun <T : BaseResponseModel> safeApiCall(call: suspend () -> Response<T>)
                 )
             }
         } else {
-            emit(Resource.error(Status.ERROR, "İnternet Hatası!"))
+            emit(
+                Resource.error(
+                    Status.ERROR,
+                    "Opps! Something went wrong."
+                )
+            )
         }
     }.catch { exception ->
         Log.d("BaseRepository", exception.localizedMessage.toString())
@@ -42,12 +47,18 @@ suspend fun <T : BaseResponseModel> safeApiCallForItemList(call: suspend () -> R
                 emit(
                     Resource.error(
                         Status.ERROR,
-                        list[0].error ?: " "
+                        list[0].error ?: "Opps! Something went wrong."
+
                     )
                 )
             }
         } else {
-            emit(Resource.error(Status.ERROR, "İnternet Hatası!"))
+            emit(
+                Resource.error(
+                    Status.ERROR,
+                    "Opps! Something went wrong."
+                )
+            )
         }
     }.catch { exception ->
         Log.d("BaseRepository", exception.localizedMessage.toString())
