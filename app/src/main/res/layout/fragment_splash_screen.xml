@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtWelcome"
+        android:id="@+id/tv_welcome"
         style="@style/Text.H1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
