@@ -25,8 +25,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel: HomeViewModel by viewModels()
-    lateinit var pagingAdapter: LocationHorizontalPagingDataAdapter
+    private var pagingAdapter = LocationHorizontalPagingDataAdapter()
     private val residentAdapter = ResidentAdapter { navigateToResidentDetail(it) }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindUI()
@@ -34,8 +35,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun bindUI() {
-        viewModel.getLocations()
-        pagingAdapter = LocationHorizontalPagingDataAdapter()
+        if (viewModel.isFirstCall) viewModel.getLocations()
 
         binding.rvLocation.apply {
             layoutManager =
@@ -96,6 +96,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun navigateToResidentDetail(residentUIModel: ResidentUIModel) {
         findNavController().navigate(HomeFragmentDirections.navigateToDetailFragment(residentUIModel))
+    }
+
+    override fun onDestroyView() {
+        binding.rvLocation.adapter = null
+        binding.rvResidents.adapter = null
+        super.onDestroyView()
     }
 
 }

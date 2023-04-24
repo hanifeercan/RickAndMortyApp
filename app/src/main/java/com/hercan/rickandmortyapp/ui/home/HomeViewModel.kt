@@ -31,7 +31,10 @@ class HomeViewModel @Inject constructor(private val repository: RickAndMortyRepo
     private val _isOnError: MutableLiveData<String?> = MutableLiveData(null)
     val isOnError: LiveData<String?> = _isOnError
 
+    var isFirstCall = true
+
     fun getLocations(): LiveData<PagingData<LocationUIModel>> {
+        isFirstCall = false
         return repository.getLocations().liveData
     }
 

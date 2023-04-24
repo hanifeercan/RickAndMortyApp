@@ -7,8 +7,10 @@ import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.Message
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.hercan.rickandmortyapp.R
 import com.hercan.rickandmortyapp.databinding.FragmentSplashScreenBinding
@@ -45,18 +47,22 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
     }
 
     private fun navigateHome() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(SplashScreenFragmentDirections.navigateToHomeFragment())
-        }, 3000)
+        val handler = Handler(Looper.getMainLooper()) {
+            view?.let {
+                viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+                    findNavController().navigate(SplashScreenFragmentDirections.navigateToHomeFragment())
+                }
+            }
+            true
+        }
+        handler.sendMessageDelayed(Message.obtain(), 3000)
     }
 
     private fun firstLoginControl() {
         val sharedPref: SharedPreferences = requireActivity().getSharedPreferences(
-            PREFS_FILENAME,
-            Context.MODE_PRIVATE
+            PREFS_FILENAME, Context.MODE_PRIVATE
         )
-        val hasLaunchedBefore: Boolean =
-            sharedPref.getBoolean(HAS_LAUNCHED_BEFORE, false)
+        val hasLaunchedBefore: Boolean = sharedPref.getBoolean(HAS_LAUNCHED_BEFORE, false)
         if (hasLaunchedBefore) {
             binding.tvWelcome.text = getString(R.string.hello)
         } else {
